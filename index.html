@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ma Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      color: #111;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .artwork {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .artwork img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .buttons {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    a.button {
+      text-align: center;
+      padding: 10px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    a.button.secondary {
+      background: #555;
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MODIFIABLE : TITRE PRINCIPAL -->
+  <h1>Nom de ton univers</h1>
+
+  <!-- MODIFIABLE : SOUS-TITRE -->
+  <p style="text-align:center;">
+    Œuvres originales disponibles en impression
+  </p>
+
+  <!-- MODIFIABLE : TEXTE D’INTRO -->
+  <p style="text-align:center;">
+    Bienvenue dans ma galerie.  
+    Clique sur une œuvre pour demander une impression ou me contacter directement.
+  </p>
+
+  <div class="gallery">
+
+    <!-- ===== ŒUVRE 1 ===== -->
+    <div class="artwork">
+      <!-- MODIFIABLE : IMAGE -->
+      <img src="image1.jpg" alt="Œuvre 1">
+
+      <!-- MODIFIABLE : TITRE -->
+      <h2>Titre de l’œuvre 1</h2>
+
+      <!-- MODIFIABLE : DESCRIPTION -->
+      <p>
+        Description courte de l’œuvre, ambiance, intention, technique, etc.
+      </p>
+
+      <!-- MODIFIABLE : FORMATS -->
+      <p>
+        Formats disponibles : A4 · A3 · A2 · Autre sur demande
+      </p>
+
+      <div class="buttons">
+        <!-- MODIFIABLE : LIEN BOT -->
+        <a class="button" href="https://t.me/TON_BOT?start=ART_01">
+          📐 Demander une impression
+        </a>
+
+        <!-- MODIFIABLE : CONTACT -->
+        <a class="button secondary" href="https://t.me/TON_PSEUDO">
+          📩 Me contacter
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== ŒUVRE 2 ===== -->
+    <div class="artwork">
+      <img src="image2.jpg" alt="Œuvre 2">
+
+      <h2>Titre de l’œuvre 2</h2>
+
+      <p>
+        Description courte de l’œuvre 2.
+      </p>
+
+      <p>
+        Formats disponibles : A4 · A3 · A2 · Autre sur demande
+      </p>
+
+      <div class="buttons">
+        <a class="button" href="https://t.me/TON_BOT?start=ART_02">
+          📐 Demander une impression
+        </a>
+
+        <a class="button secondary" href="https://t.me/TON_PSEUDO">
+          📩 Me contacter
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODIFIABLE : FOOTER -->
+  <footer>
+    Toutes les impressions sont réalisées à la demande.  
+    © Ton nom / pseudo
+  </footer>
+
+</body>
+</html>
