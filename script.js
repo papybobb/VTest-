@@ -1,15 +1,15 @@
 // Configuration de base
 const CONFIG = {
     // ⚠️ IMPORTANT : Remplacez par votre nom d'utilisateur Telegram
-    telegramUsername: 'votre_username', // Par exemple : 'monshop' pour @monshop
+    telegramUsername: 'Le_V667', // Par exemple : 'monshop' pour @monshop
     
     // Données des produits
     products: [
         {
             id: 1,
-            name: 'Brownies 120U',
+            name: 'Brownies "The Gaz Selection 90U',
             description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
-            price: '5parts 40e',
+            price: '5 parts 40e',
             image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
             video: null, // Vous pouvez ajouter une URL vidéo ici
             badge: 'Populaire',
@@ -23,8 +23,8 @@ const CONFIG = {
         },
         {
             id: 2,
-            name: 'Unicorn',
-            description: 'Découvrez notre deuxième produit avec des fonctionnalités exceptionnelles et un design moderne.',
+            name: 'Unicorn Isomere S/R',
+            description: 'Découvrez notre deuxième produit pour en voir de toute les coulleurs.',
             price: '20€',
             image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
             video: null,
