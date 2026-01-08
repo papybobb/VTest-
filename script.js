@@ -7,32 +7,32 @@ const CONFIG = {
     products: [
         {
             id: 1,
-            name: 'Produit Premium 1',
+            name: 'Brownies 120U',
             description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
-            price: '29.99€',
+            price: '5parts 40e',
             image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
             video: null, // Vous pouvez ajouter une URL vidéo ici
             badge: 'Populaire',
             formats: [
-                { name: 'Petit', price: '29.99€' },
-                { name: 'Moyen', price: '39.99€' },
-                { name: 'Grand', price: '49.99€' }
+                { name: '2parts', price: '20€' },
+                { name: '5parts', price: '40€' },
+                { name: '10parts', price: '80€' }
             ],
             ratings: [],
             comments: []
         },
         {
             id: 2,
-            name: 'Produit Premium 2',
+            name: 'Unicorn',
             description: 'Découvrez notre deuxième produit avec des fonctionnalités exceptionnelles et un design moderne.',
-            price: '39.99€',
+            price: '20€',
             image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
             video: null,
             badge: 'Nouveau',
             formats: [
-                { name: 'Standard', price: '39.99€' },
-                { name: 'Premium', price: '59.99€' },
-                { name: 'Deluxe', price: '79.99€' }
+                { name: '1', price: '20€' },
+                { name: '2', price: '40€' },
+                { name: '5', price: '100€' }
             ],
             ratings: [],
             comments: []
