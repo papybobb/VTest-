@@ -1,162 +1,105 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ma Galerie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      color: #111;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 40px;
-    }
-
-    p {
-      line-height: 1.5;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .artwork {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .artwork img {
-      width: 100%;
-      border-radius: 6px;
-    }
-
-    .buttons {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    a.button {
-      text-align: center;
-      padding: 10px;
-      background: #0088cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-
-    a.button.secondary {
-      background: #555;
-    }
-
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 14px;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ma Boutique - Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="brand-title">✨ Ma Boutique</h1>
+                <p class="brand-subtitle">Produits de qualité premium</p>
+            </div>
+        </header>
 
-  <!-- MODIFIABLE : TITRE PRINCIPAL -->
-  <h1>Nom de ton univers</h1>
+        <!-- Products Grid -->
+        <main class="products-section">
+            <div class="products-grid" id="productsGrid">
+                <!-- Les produits seront générés dynamiquement par JavaScript -->
+            </div>
+        </main>
 
-  <!-- MODIFIABLE : SOUS-TITRE -->
-  <p style="text-align:center;">
-    Œuvres originales disponibles en impression
-  </p>
+        <!-- Product Modal -->
+        <div class="modal" id="productModal">
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">&times;</button>
+                
+                <div class="modal-body">
+                    <!-- Image/Vidéo -->
+                    <div class="modal-media">
+                        <img id="modalImage" src="" alt="">
+                        <video id="modalVideo" controls style="display: none;">
+                            <source src="" type="video/mp4">
+                        </video>
+                    </div>
 
-  <!-- MODIFIABLE : TEXTE D’INTRO -->
-  <p style="text-align:center;">
-    Bienvenue dans ma galerie.  
-    Clique sur une œuvre pour demander une impression ou me contacter directement.
-  </p>
+                    <!-- Info produit -->
+                    <div class="modal-info">
+                        <h2 id="modalTitle"></h2>
+                        <p class="modal-price" id="modalPrice"></p>
+                        <p class="modal-description" id="modalDescription"></p>
 
-  <div class="gallery">
+                        <!-- Sélection de format -->
+                        <div class="format-selection">
+                            <label class="format-label">Choisissez votre format :</label>
+                            <div class="format-options" id="formatOptions">
+                                <!-- Les options seront générées dynamiquement -->
+                            </div>
+                        </div>
 
-    <!-- ===== ŒUVRE 1 ===== -->
-    <div class="artwork">
-      <!-- MODIFIABLE : IMAGE -->
-      <img src="image1.jpg" alt="Œuvre 1">
+                        <!-- Bouton Commander -->
+                        <button class="order-btn" id="orderBtn">
+                            <span>Commander maintenant</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
 
-      <!-- MODIFIABLE : TITRE -->
-      <h2>Titre de l’œuvre 1</h2>
+                        <!-- Section Notation -->
+                        <div class="rating-section">
+                            <h3>Votre avis compte !</h3>
+                            <div class="stars-container">
+                                <div class="stars" id="starsInput">
+                                    <span class="star" data-value="1">☆</span>
+                                    <span class="star" data-value="2">☆</span>
+                                    <span class="star" data-value="3">☆</span>
+                                    <span class="star" data-value="4">☆</span>
+                                    <span class="star" data-value="5">☆</span>
+                                </div>
+                                <p class="rating-average" id="ratingAverage"></p>
+                            </div>
+                        </div>
 
-      <!-- MODIFIABLE : DESCRIPTION -->
-      <p>
-        Description courte de l’œuvre, ambiance, intention, technique, etc.
-      </p>
+                        <!-- Section Commentaires -->
+                        <div class="comments-section">
+                            <h3>Commentaires</h3>
+                            
+                            <!-- Formulaire d'ajout de commentaire -->
+                            <div class="comment-form">
+                                <textarea 
+                                    id="commentInput" 
+                                    placeholder="Partagez votre expérience..."
+                                    rows="3"
+                                ></textarea>
+                                <button class="submit-comment" id="submitComment">
+                                    Publier
+                                </button>
+                            </div>
 
-      <!-- MODIFIABLE : FORMATS -->
-      <p>
-        Formats disponibles : A4 · A3 · A2 · Autre sur demande
-      </p>
-
-      <div class="buttons">
-        <!-- MODIFIABLE : LIEN BOT -->
-        <a class="button" href="https://t.me/TON_BOT?start=ART_01">
-          📐 Demander une impression
-        </a>
-
-        <!-- MODIFIABLE : CONTACT -->
-        <a class="button secondary" href="https://t.me/TON_PSEUDO">
-          📩 Me contacter
-        </a>
-      </div>
+                            <!-- Liste des commentaires -->
+                            <div class="comments-list" id="commentsList">
+                                <!-- Les commentaires seront générés dynamiquement -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== ŒUVRE 2 ===== -->
-    <div class="artwork">
-      <img src="image2.jpg" alt="Œuvre 2">
-
-      <h2>Titre de l’œuvre 2</h2>
-
-      <p>
-        Description courte de l’œuvre 2.
-      </p>
-
-      <p>
-        Formats disponibles : A4 · A3 · A2 · Autre sur demande
-      </p>
-
-      <div class="buttons">
-        <a class="button" href="https://t.me/TON_BOT?start=ART_02">
-          📐 Demander une impression
-        </a>
-
-        <a class="button secondary" href="https://t.me/TON_PSEUDO">
-          📩 Me contacter
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- MODIFIABLE : FOOTER -->
-  <footer>
-    Toutes les impressions sont réalisées à la demande.  
-    © Ton nom / pseudo
-  </footer>
-
-</body>
-</html>
+    <script src="script.js"></script>
