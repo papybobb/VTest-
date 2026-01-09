@@ -10,7 +10,7 @@ const CONFIG = {
             name: 'Brownies "The Gaz Selection" 90U',
             description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
             price: '5 parts 40e',
-            image: 'https://unsplash.com/fr/photos/deux-barres-brunes-LmHzkqB8cPY'
+            image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?'
             video: null,
             badge: 'Top vente🥇',
             formats: [
