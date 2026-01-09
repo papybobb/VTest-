@@ -11,7 +11,7 @@ const CONFIG = {
             description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
             price: '5 parts 40e',
             image: 'https://www.google.com/search?sca_esv=727911a362dc4a92&rlz=1C1DHFH_enFR1129FR1129&sxsrf=ANbL-n6wzEvIsg_3t3wBbUNs-xzceGac2Q:1767888565139&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDxBhxkqK2ctBUPnNyDe33GYYnwcUdDZEOgtbP_iLwZE3_BspBSwA7ni4OLesTXSDJYgVU2Op4jmFVXyk-8dVgHWUW8xph1ZkCMzCdEciz83ZVM9LSpdTaEmByC1mokozROTvs69kHOtGRHh9Lar50xP1c7ZWsYAGtDp7yshDP2eoHVM8zTS2avPt&q=brownie&sa=X&ved=2ahUKEwirsLWPqvyRAxU3VKQEHcDBOXUQtKgLegQIFhAB&biw=1536&bih=695&dpr=1.25&aic=0#sv=CAMSVhoyKhBlLXdHNGVoMU93TzFtM0FNMg53RzRlaDFPKiwsqsPjgQbM9NmSD2efUchPjFT9HR9cCgZtb3NhaWMSEGUtd0c0ZWgxT3dPMW0zQU0YADABGAcguoutMzACSgoIAhACGAIgAigC',
-            video: null, // https://t.me/c/3672019462/5
+            video:  // https://t.me/c/3672019462/5
             badge: 'Top vente🥇',
             formats: [
                 { name: '2parts', price: '20€' },
