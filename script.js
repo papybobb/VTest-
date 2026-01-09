@@ -11,7 +11,7 @@ const CONFIG = {
             description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
             price: '5 parts 40e',
             image: 'https://unsplash.com/fr/photos/deux-barres-brunes-LmHzkqB8cPY'
-            video:  // https://t.me/c/3672019462/5
+            video: null,
             badge: 'Top vente🥇',
             formats: [
                 { name: '2parts', price: '20€' },
