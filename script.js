@@ -13,7 +13,7 @@ products: [
         price: '8€/gâteau',
         image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
         video: null, // Vous pouvez ajouter une URL vidéo ici
-        badge: 'Populaire',
+        badge: 'Top 1 des ventes🥇',
         formats: [
             { name: '2,5 gâteaux ', price: '20€' },
             { name: '5 gâteaux ', price: '40€' },
