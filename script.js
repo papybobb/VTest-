@@ -8,7 +8,7 @@ telegramUsername: ‘votre_username’, // Par exemple : ‘monshop’ pour @mon
 products: [
     {
         id: 1,
-        name: 'Top 1 des ventes🥇',
+        name: 'Brownies 90U',
         description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
         price: '8€/gâteau',
         image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
