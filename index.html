@@ -27,7 +27,6 @@
             text-align: center;
             color: white;
             margin-bottom: 40px;
-            animation: fadeInDown 0.6s ease;
         }
 
         header h1 {
@@ -43,7 +42,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -53,37 +52,21 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.6s ease;
+            transition: transform 0.3s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
         }
 
         .product-media {
             width: 100%;
             height: 250px;
-            object-fit: cover;
             background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 4em;
-        }
-        
-        .product-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .product-media video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            font-size: 5em;
         }
 
         .product-info {
@@ -120,16 +103,12 @@
         .star {
             font-size: 24px;
             cursor: pointer;
-            transition: all 0.2s ease;
             color: #ddd;
+            user-select: none;
         }
 
         .star.active {
             color: #ffd700;
-        }
-
-        .star:hover {
-            transform: scale(1.2);
         }
 
         .rating-info {
@@ -151,10 +130,12 @@
         .format-options {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .format-btn {
             flex: 1;
+            min-width: 80px;
             padding: 12px;
             border: 2px solid #667eea;
             background: white;
@@ -162,11 +143,7 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .format-btn:hover {
-            background: #f0f4ff;
+            font-size: 1em;
         }
 
         .format-btn.selected {
@@ -192,19 +169,7 @@
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-bottom: 20px;
-        }
-
-        .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .order-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
         }
 
         .comments-section {
@@ -272,28 +237,6 @@
             margin-top: 5px;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
@@ -319,39 +262,31 @@
         // ===== CONFIGURATION FACILE - MODIFIEZ ICI =====
         
         const CONFIG = {
-            telegramUsername: '@VotreShop', // Changez par votre username Telegram
+            telegramUsername: '@VotreShop',
             
-            // Prix pour chaque format (en euros)
             prices: {
                 '2.5g': 15,
                 '5g': 25,
                 '10g': 45
             },
             
-            // Vos produits
             products: [
                 {
                     id: 1,
                     name: 'Brownies Fitre',
                     description: 'Délicieux brownies artisanaux au chocolat noir, texture fondante et goût intense. Parfait pour une pause gourmande.',
-                    mediaType: 'placeholder', // 'image', 'video' ou 'placeholder'
-                    mediaUrl: '', // Mettez l'URL de votre image/vidéo ici
                     icon: '🍫'
                 },
                 {
                     id: 2,
                     name: 'Unicorn',
                     description: 'Un mélange magique et coloré qui éveille les sens. Douceur sucrée avec une touche de vanille et de fruits rouges.',
-                    mediaType: 'placeholder',
-                    mediaUrl: '',
                     icon: '🦄'
                 },
                 {
                     id: 3,
                     name: 'Look out of Heaven',
                     description: 'Une expérience céleste unique. Notes florales délicates avec un arrière-goût fruité et relaxant.',
-                    mediaType: 'placeholder',
-                    mediaUrl: '',
                     icon: '☁️'
                 }
             ]
@@ -359,14 +294,16 @@
         
         // ===== FIN DE LA CONFIGURATION =====
 
-        // Données stockées localement
         let productData = {};
 
-        // Initialiser les données depuis localStorage
         function initData() {
-            const saved = localStorage.getItem('shopData');
-            if (saved) {
-                productData = JSON.parse(saved);
+            try {
+                const saved = localStorage.getItem('shopData');
+                if (saved) {
+                    productData = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.log('Erreur localStorage:', e);
             }
             
             CONFIG.products.forEach(p => {
@@ -382,7 +319,11 @@
         }
 
         function saveData() {
-            localStorage.setItem('shopData', JSON.stringify(productData));
+            try {
+                localStorage.setItem('shopData', JSON.stringify(productData));
+            } catch (e) {
+                console.log('Erreur sauvegarde:', e);
+            }
         }
 
         function getAverageRating(productId) {
@@ -393,6 +334,8 @@
 
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
+            if (!grid) return;
+            
             grid.innerHTML = '';
 
             CONFIG.products.forEach(product => {
@@ -403,47 +346,46 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 
-                let mediaHTML = '';
-                if (product.mediaType === 'image' && product.mediaUrl) {
-                    mediaHTML = `<div class="product-media"><img src="${product.mediaUrl}" alt="${product.name}"></div>`;
-                } else if (product.mediaType === 'video' && product.mediaUrl) {
-                    mediaHTML = `<div class="product-media"><video src="${product.mediaUrl}" controls></video></div>`;
-                } else {
-                    mediaHTML = `<div class="product-media">${product.icon || '📦'}</div>`;
-                }
+                const starsHTML = [1,2,3,4,5].map(i => 
+                    `<span class="star ${i <= Math.round(avgRating) ? 'active' : ''}" onclick="addRating(${product.id}, ${i})">★</span>`
+                ).join('');
                 
+                const formatsHTML = Object.keys(CONFIG.prices).map(format => 
+                    `<button class="format-btn ${data.selectedFormat === format ? 'selected' : ''}" onclick="selectFormat(${product.id}, '${format}')">${format}</button>`
+                ).join('');
+                
+                const commentsHTML = data.comments.length > 0 
+                    ? data.comments.map(c => `
+                        <div class="comment">
+                            <div class="comment-author">Client anonyme</div>
+                            <div class="comment-text">${c.text}</div>
+                            <div class="comment-date">${new Date(c.date).toLocaleDateString('fr-FR')}</div>
+                        </div>
+                    `).join('')
+                    : '<p style="color: #999; text-align: center; padding: 10px;">Aucun commentaire</p>';
+
                 card.innerHTML = `
-                    ${mediaHTML}
+                    <div class="product-media">${product.icon}</div>
                     
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
                         <div class="product-description">${product.description}</div>
                         
                         <div class="rating-section">
-                            <div class="stars" data-product="${product.id}">
-                                ${[1,2,3,4,5].map(i => `<span class="star ${i <= Math.round(avgRating) ? 'active' : ''}" data-rating="${i}">★</span>`).join('')}
-                            </div>
+                            <div class="stars">${starsHTML}</div>
                             <div class="rating-info">
-                                ${avgRating > 0 ? `${avgRating}/5 (${data.ratings.length} avis)` : 'Pas encore d\'avis'}
+                                ${avgRating > 0 ? `${avgRating}/5 (${data.ratings.length} avis)` : 'Pas d\'avis'}
                             </div>
                         </div>
                         
                         <div class="format-selector">
                             <label>Choisissez le format :</label>
-                            <div class="format-options">
-                                ${Object.keys(CONFIG.prices).map(format => `
-                                    <button class="format-btn ${data.selectedFormat === format ? 'selected' : ''}" 
-                                            data-product="${product.id}" 
-                                            data-format="${format}">
-                                        ${format}
-                                    </button>
-                                `).join('')}
-                            </div>
+                            <div class="format-options">${formatsHTML}</div>
                         </div>
                         
                         <div class="price-display">${currentPrice}€</div>
                         
-                        <button class="order-btn" data-product="${product.id}">
+                        <button class="order-btn" onclick="orderProduct(${product.id})">
                             🛒 Commander sur Telegram
                         </button>
                         
@@ -451,80 +393,36 @@
                             <div class="comments-title">💬 Commentaires (${data.comments.length})</div>
                             
                             <div class="comment-form">
-                                <textarea placeholder="Laissez votre commentaire..." data-product="${product.id}"></textarea>
+                                <textarea id="comment-${product.id}" placeholder="Laissez votre commentaire..."></textarea>
                                 <button onclick="addComment(${product.id})">Publier</button>
                             </div>
                             
-                            <div class="comments-list">
-                                ${data.comments.map(c => `
-                                    <div class="comment">
-                                        <div class="comment-author">Client anonyme</div>
-                                        <div class="comment-text">${c.text}</div>
-                                        <div class="comment-date">${new Date(c.date).toLocaleDateString('fr-FR')}</div>
-                                    </div>
-                                `).join('') || '<p style="color: #999; text-align: center;">Aucun commentaire pour le moment</p>'}
-                            </div>
+                            <div class="comments-list">${commentsHTML}</div>
                         </div>
                     </div>
                 `;
                 
                 grid.appendChild(card);
             });
-
-            attachEventListeners();
         }
 
-        function attachEventListeners() {
-            // Gestion des étoiles
-            document.querySelectorAll('.stars').forEach(starsContainer => {
-                starsContainer.querySelectorAll('.star').forEach(star => {
-                    star.addEventListener('click', function() {
-                        const productId = parseInt(this.parentElement.dataset.product);
-                        const rating = parseInt(this.dataset.rating);
-                        
-                        productData[productId].ratings.push(rating);
-                        saveData();
-                        renderProducts();
-                    });
-                });
-            });
+        function addRating(productId, rating) {
+            productData[productId].ratings.push(rating);
+            saveData();
+            renderProducts();
+        }
 
-            // Gestion des formats
-            document.querySelectorAll('.format-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const productId = parseInt(this.dataset.product);
-                    const format = this.dataset.format;
-                    
-                    productData[productId].selectedFormat = format;
-                    saveData();
-                    renderProducts();
-                });
-            });
-
-            // Gestion des commandes
-            document.querySelectorAll('.order-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const productId = parseInt(this.dataset.product);
-                    const product = CONFIG.products.find(p => p.id === productId);
-                    const format = productData[productId].selectedFormat;
-                    const price = CONFIG.prices[format];
-                    
-                    const message = `🛍️ Nouvelle commande:%0A%0A` +
-                                  `📦 Produit: ${product.name}%0A` +
-                                  `⚖️ Format: ${format}%0A` +
-                                  `💰 Prix: ${price}€%0A%0A` +
-                                  `Je souhaite commander ce produit.`;
-                    
-                    const telegramUrl = `https://t.me/${CONFIG.telegramUsername.replace('@', '')}?text=${message}`;
-                    window.open(telegramUrl, '_blank');
-                });
-            });
+        function selectFormat(productId, format) {
+            productData[productId].selectedFormat = format;
+            saveData();
+            renderProducts();
         }
 
         function addComment(productId) {
-            const textarea = document.querySelector(`textarea[data-product="${productId}"]`);
-            const text = textarea.value.trim();
+            const textarea = document.getElementById(`comment-${productId}`);
+            if (!textarea) return;
             
+            const text = textarea.value.trim();
             if (text) {
                 productData[productId].comments.unshift({
                     text: text,
@@ -535,9 +433,26 @@
             }
         }
 
-        // Initialisation
-        initData();
-        renderProducts();
+        function orderProduct(productId) {
+            const product = CONFIG.products.find(p => p.id === productId);
+            const format = productData[productId].selectedFormat;
+            const price = CONFIG.prices[format];
+            
+            const message = `🛍️ Nouvelle commande:%0A%0A` +
+                          `📦 Produit: ${product.name}%0A` +
+                          `⚖️ Format: ${format}%0A` +
+                          `💰 Prix: ${price}€%0A%0A` +
+                          `Je souhaite commander ce produit.`;
+            
+            const telegramUrl = `https://t.me/${CONFIG.telegramUsername.replace('@', '')}?text=${message}`;
+            window.open(telegramUrl, '_blank');
+        }
+
+        // Initialisation au chargement
+        window.addEventListener('DOMContentLoaded', function() {
+            initData();
+            renderProducts();
+        });
     </script>
 </body>
 </html>
