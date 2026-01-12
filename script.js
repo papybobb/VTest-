@@ -8,7 +8,8 @@ telegramUsername: ‘votre_username’,
 products: [
     {
         id: 1,
-        name: 'Brownies Filtre 90U Gorilla Glue',
+        name: 'Brownies Filtre 
+        90U Gorilla Glue',
         description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
         price: '8€',
         image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
