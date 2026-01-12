@@ -8,52 +8,36 @@ telegramUsername: ‘votre_username’,
 products: [
     {
         id: 1,
-        name: 'Produit Premium 1',
+        name: 'Brownies Filtre 90U Gorilla Glue',
         description: 'Un produit d\'exception avec des caractéristiques uniques. Qualité supérieure garantie.',
-        price: '29.99€',
+        price: '8€',
         image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
         video: null,
         badge: 'Populaire',
         formats: [
-            { name: 'Petit', price: '29.99€' },
-            { name: 'Moyen', price: '39.99€' },
-            { name: 'Grand', price: '49.99€' }
+            { name: '2.5g', price: '20€' },
+            { name: '5g', price: '40€' },
+            { name: '10g', price: '80€' }
         ],
         ratings: [],
         comments: []
     },
     {
         id: 2,
-        name: 'Produit Premium 2',
+        name: 'Unicorn Isomere R/S',
         description: 'Découvrez notre deuxième produit avec des fonctionnalités exceptionnelles et un design moderne.',
-        price: '39.99€',
+        price: '30€',
         image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
         video: null,
         badge: 'Nouveau',
         formats: [
-            { name: 'Standard', price: '39.99€' },
-            { name: 'Premium', price: '59.99€' },
-            { name: 'Deluxe', price: '79.99€' }
+            { name: '1 sucre', price: '30€' },
+            { name: '2 sucres', price: '60€' },
+            { name: '5 sucres', price: '120€' }
         ],
         ratings: [],
         comments: []
     },
-    {
-        id: 3,
-        name: 'Produit Premium 3',
-        description: 'Le meilleur choix pour ceux qui recherchent l\'excellence. Innovation et qualité réunies.',
-        price: '49.99€',
-        image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop',
-        video: null,
-        badge: 'Best Seller',
-        formats: [
-            { name: 'Basic', price: '49.99€' },
-            { name: 'Pro', price: '69.99€' },
-            { name: 'Ultimate', price: '99.99€' }
-        ],
-        ratings: [],
-        comments: []
-    }
 ]
 ```
 
