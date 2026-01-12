@@ -1,100 +1,515 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Le V Menu 😈</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Plantes & Pâtisseries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .product-media {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #ddd;
+        }
+
+        .star.active {
+            color: #ffd700;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .rating-info {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .format-selector {
+            margin-bottom: 20px;
+        }
+
+        .format-selector label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .format-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .format-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .format-btn:hover {
+            background: #f0f4ff;
+        }
+
+        .format-btn.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .price-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .order-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .comments-section {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .comments-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .comment-form {
+            margin-bottom: 20px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+
+        .comment-form button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .comments-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .comment {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .comment-text {
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .comment-date {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <h1 class="brand-title">😈 Le V Menu 😈</h1>
-                <p class="brand-subtitle">Produits de qualité premium</p>
-            </div>
+    <div class="container">
+        <header>
+            <h1>🌿 Plantes & Pâtisseries</h1>
+            <p>Sélectionnez vos produits et commandez sur Telegram</p>
         </header>
 
-```
-    <!-- Products Grid -->
-    <main class="products-section">
-        <div class="products-grid" id="productsGrid">
-            <!-- Les produits seront générés par JavaScript -->
-        </div>
-    </main>
-
-    <!-- Product Modal -->
-    <div class="modal" id="productModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose">&times;</button>
-            
-            <div class="modal-body">
-                <!-- Image/Vidéo -->
-                <div class="modal-media">
-                    <img id="modalImage" src="" alt="">
-                    <video id="modalVideo" controls style="display: none;">
-                        <source src="" type="video/mp4">
-                    </video>
-                </div>
-
-                <!-- Info produit -->
-                <div class="modal-info">
-                    <h2 id="modalTitle"></h2>
-                    <p class="modal-price" id="modalPrice"></p>
-                    <p class="modal-description" id="modalDescription"></p>
-
-                    <!-- Sélection de format -->
-                    <div class="format-selection">
-                        <label class="format-label">Choisissez votre format :</label>
-                        <div class="format-options" id="formatOptions"></div>
-                    </div>
-
-                    <!-- Bouton Commander -->
-                    <button class="order-btn" id="orderBtn">
-                        <span>Commander maintenant</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-
-                    <!-- Section Notation -->
-                    <div class="rating-section">
-                        <h3>Votre avis compte !</h3>
-                        <div class="stars-container">
-                            <div class="stars" id="starsInput">
-                                <span class="star" data-value="1">☆</span>
-                                <span class="star" data-value="2">☆</span>
-                                <span class="star" data-value="3">☆</span>
-                                <span class="star" data-value="4">☆</span>
-                                <span class="star" data-value="5">☆</span>
-                            </div>
-                            <p class="rating-average" id="ratingAverage"></p>
-                        </div>
-                    </div>
-
-                    <!-- Section Commentaires -->
-                    <div class="comments-section">
-                        <h3>Commentaires</h3>
-                        
-                        <div class="comment-form">
-                            <textarea id="commentInput" placeholder="Partagez votre expérience..." rows="3"></textarea>
-                            <button class="submit-comment" id="submitComment">Publier</button>
-                        </div>
-
-                        <div class="comments-list" id="commentsList"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="products-grid" id="productsGrid"></div>
     </div>
-</div>
 
-<!-- IMPORTANT: Le script DOIT être chargé à la fin -->
-<script src="script.js"></script>
-```
+    <script>
+        // ===== CONFIGURATION FACILE - MODIFIEZ ICI =====
+        
+        const CONFIG = {
+            telegramUsername: 'Le_V667', // Changez par votre username Telegram
+            
+            // Prix pour chaque format (en euros)
+            prices: {
+                '2.5g': 20€,
+                '5g': 40€,
+                '10g': 80€
+            },
+            
+            // Vos produits
+            products: [
+                {
+                    id: 1,
+                    name: 'Brownies Fitre 90U Gorilla Glue',
+                    description: 'Délicieux brownies artisanaux au chocolat noir, texture fondante et goût intense. Parfait pour une pause gourmande.',
+                    mediaType: 'image', // 'image' ou 'video'
+                    mediaUrl: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500' // Remplacez par votre URL
+                },
+                {
+                    id: 2,
+                    name: 'Unicorn Isomere R/S',
+                    description: 'Un mélange magique et coloré qui éveille les sens. Douceur sucrée avec une touche de vanille et de fruits rouges.',
+                    mediaType: 'image',
+                    mediaUrl: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=500'
+                },
+            ]
+        };
+        
+        // ===== FIN DE LA CONFIGURATION =====
 
+        // Données stockées localement
+        let productData = {};
+
+        // Initialiser les données depuis localStorage
+        function initData() {
+            const saved = localStorage.getItem('shopData');
+            if (saved) {
+                productData = JSON.parse(saved);
+            }
+            
+            CONFIG.products.forEach(p => {
+                if (!productData[p.id]) {
+                    productData[p.id] = {
+                        ratings: [],
+                        comments: [],
+                        selectedFormat: '2.5g'
+                    };
+                }
+            });
+            saveData();
+        }
+
+        function saveData() {
+            localStorage.setItem('shopData', JSON.stringify(productData));
+        }
+
+        function getAverageRating(productId) {
+            const ratings = productData[productId].ratings;
+            if (ratings.length === 0) return 0;
+            return (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1);
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            CONFIG.products.forEach(product => {
+                const data = productData[product.id];
+                const avgRating = getAverageRating(product.id);
+                const currentPrice = CONFIG.prices[data.selectedFormat];
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    ${product.mediaType === 'image' 
+                        ? `<img src="${product.mediaUrl}" alt="${product.name}" class="product-media" onerror="this.style.background='linear-gradient(45deg, #f093fb 0%, #f5576c 100%)'; this.innerHTML='📷 Image'">` 
+                        : `<video src="${product.mediaUrl}" class="product-media" controls></video>`
+                    }
+                    
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">${product.description}</div>
+                        
+                        <div class="rating-section">
+                            <div class="stars" data-product="${product.id}">
+                                ${[1,2,3,4,5].map(i => `<span class="star ${i <= Math.round(avgRating) ? 'active' : ''}" data-rating="${i}">★</span>`).join('')}
+                            </div>
+                            <div class="rating-info">
+                                ${avgRating > 0 ? `${avgRating}/5 (${data.ratings.length} avis)` : 'Pas encore d\'avis'}
+                            </div>
+                        </div>
+                        
+                        <div class="format-selector">
+                            <label>Choisissez le format :</label>
+                            <div class="format-options">
+                                ${Object.keys(CONFIG.prices).map(format => `
+                                    <button class="format-btn ${data.selectedFormat === format ? 'selected' : ''}" 
+                                            data-product="${product.id}" 
+                                            data-format="${format}">
+                                        ${format}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="price-display">${currentPrice}€</div>
+                        
+                        <button class="order-btn" data-product="${product.id}">
+                            🛒 Commander sur Telegram
+                        </button>
+                        
+                        <div class="comments-section">
+                            <div class="comments-title">💬 Commentaires (${data.comments.length})</div>
+                            
+                            <div class="comment-form">
+                                <textarea placeholder="Laissez votre commentaire..." data-product="${product.id}"></textarea>
+                                <button onclick="addComment(${product.id})">Publier</button>
+                            </div>
+                            
+                            <div class="comments-list">
+                                ${data.comments.map(c => `
+                                    <div class="comment">
+                                        <div class="comment-author">Client anonyme</div>
+                                        <div class="comment-text">${c.text}</div>
+                                        <div class="comment-date">${new Date(c.date).toLocaleDateString('fr-FR')}</div>
+                                    </div>
+                                `).join('') || '<p style="color: #999; text-align: center;">Aucun commentaire pour le moment</p>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
+            // Gestion des étoiles
+            document.querySelectorAll('.stars').forEach(starsContainer => {
+                starsContainer.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const productId = parseInt(this.parentElement.dataset.product);
+                        const rating = parseInt(this.dataset.rating);
+                        
+                        productData[productId].ratings.push(rating);
+                        saveData();
+                        renderProducts();
+                    });
+                });
+            });
+
+            // Gestion des formats
+            document.querySelectorAll('.format-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.product);
+                    const format = this.dataset.format;
+                    
+                    productData[productId].selectedFormat = format;
+                    saveData();
+                    renderProducts();
+                });
+            });
+
+            // Gestion des commandes
+            document.querySelectorAll('.order-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.product);
+                    const product = CONFIG.products.find(p => p.id === productId);
+                    const format = productData[productId].selectedFormat;
+                    const price = CONFIG.prices[format];
+                    
+                    const message = `🛍️ Nouvelle commande:%0A%0A` +
+                                  `📦 Produit: ${product.name}%0A` +
+                                  `⚖️ Format: ${format}%0A` +
+                                  `💰 Prix: ${price}€%0A%0A` +
+                                  `Je souhaite commander ce produit.`;
+                    
+                    const telegramUrl = `https://t.me/${CONFIG.telegramUsername.replace('@', '')}?text=${message}`;
+                    window.open(telegramUrl, '_blank');
+                });
+            });
+        }
+
+        function addComment(productId) {
+            const textarea = document.querySelector(`textarea[data-product="${productId}"]`);
+            const text = textarea.value.trim();
+            
+            if (text) {
+                productData[productId].comments.unshift({
+                    text: text,
+                    date: new Date().toISOString()
+                });
+                saveData();
+                renderProducts();
+            }
+        }
+
+        // Initialisation
+        initData();
+        renderProducts();
+    </script>
 </body>
 </html>
