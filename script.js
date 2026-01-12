@@ -1,7 +1,7 @@
 // ⚠️ CONFIGURATION - MODIFIEZ ICI VOS INFORMATIONS
 const CONFIG = {
 // Remplacez par votre nom d’utilisateur Telegram (sans @)
-telegramUsername: ‘votre_username’,
+telegramUsername: ‘Le_V667’,
 
 ```
 // Vos produits
