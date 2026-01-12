@@ -1,5 +1,5 @@
 // ⚠️ CONFIGURATION - MODIFIEZ ICI VOS INFORMATIONS
-const CONFIG = {
+const CONFIG = {@TESTTEST
 // Remplacez par votre nom d’utilisateur Telegram (sans @)
 telegramUsername: ‘Le_V667’,
 
