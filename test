@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Le V Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0F0F1E;
+            color: white;
+            padding: 20px;
+        }
+        .test-box {
+            background: #1A1A2E;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        .success { border-left: 4px solid #00D9A3; }
+        .error { border-left: 4px solid #FF6B9D; }
+        .product-card {
+            background: #1A1A2E;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+        }
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test de diagnostic - Le V Menu</h1>
+
+```
+<div class="test-box success">
+    <h3>✅ HTML chargé</h3>
+    <p>Si vous voyez ceci, le HTML fonctionne.</p>
+</div>
+
+<div class="test-box" id="jsTest">
+    <h3>⏳ Test JavaScript...</h3>
+    <p>En attente...</p>
+</div>
+
+<div class="test-box" id="productsTest">
+    <h3>📦 Zone des produits</h3>
+    <div id="productsGrid"></div>
+</div>
+
+<script>
+    console.log('🚀 Script de test démarré');
+    
+    // Test 1: JavaScript fonctionne
+    document.getElementById('jsTest').innerHTML = `
+        <h3>✅ JavaScript fonctionne</h3>
+        <p>Le script s'exécute correctement.</p>
+    `;
+    document.getElementById('jsTest').className = 'test-box success';
+    
+    // Test 2: Charger les produits
+    const products = [
+        {
+            name: '🍕 Pizza Margherita',
+            price: '12€',
+            image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400'
+        },
+        {
+            name: '🍔 Burger Deluxe',
+            price: '15€',
+            image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400'
+        },
+        {
+            name: '🍝 Pasta Carbonara',
+            price: '14€',
+            image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400'
+        }
+    ];
+    
+    console.log('📦 Produits à charger:', products.length);
+    
+    const grid = document.getElementById('productsGrid');
+    
+    products.forEach(function(product) {
+        console.log('➕ Ajout:', product.name);
+        
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p style="color: #FFD93D; font-size: 1.5rem;">${product.price}</p>
+        `;
+        grid.appendChild(card);
+    });
+    
+    console.log('✅ Produits ajoutés au DOM');
+    
+    // Vérifier si les produits sont visibles
+    setTimeout(function() {
+        const cards = document.querySelectorAll('.product-card');
+        console.log('🔍 Nombre de cartes trouvées:', cards.length);
+        
+        if (cards.length > 0) {
+            document.getElementById('productsTest').innerHTML = `
+                <h3>✅ ${cards.length} produits chargés avec succès!</h3>
+                ${document.getElementById('productsGrid').outerHTML}
+            `;
+            document.getElementById('productsTest').className = 'test-box success';
+        } else {
+            document.getElementById('productsTest').innerHTML = `
+                <h3>❌ Aucun produit trouvé</h3>
+                <p>Problème avec le chargement des produits.</p>
+            `;
+            document.getElementById('productsTest').className = 'test-box error';
+        }
+    }, 1000);
+</script>
+```
+
+</body>
+</html>
