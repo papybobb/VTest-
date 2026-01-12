@@ -71,8 +71,19 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 4em;
+        }
+        
+        .product-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .product-info {
@@ -308,31 +319,41 @@
         // ===== CONFIGURATION FACILE - MODIFIEZ ICI =====
         
         const CONFIG = {
-            telegramUsername: 'Le_V667', // Changez par votre username Telegram
+            telegramUsername: '@VotreShop', // Changez par votre username Telegram
             
             // Prix pour chaque format (en euros)
             prices: {
-                '2.5g': 20€,
-                '5g': 40€,
-                '10g': 80€
+                '2.5g': 15,
+                '5g': 25,
+                '10g': 45
             },
             
             // Vos produits
             products: [
                 {
                     id: 1,
-                    name: 'Brownies Fitre 90U Gorilla Glue',
+                    name: 'Brownies Fitre',
                     description: 'Délicieux brownies artisanaux au chocolat noir, texture fondante et goût intense. Parfait pour une pause gourmande.',
-                    mediaType: 'image', // 'image' ou 'video'
-                    mediaUrl: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500' // Remplacez par votre URL
+                    mediaType: 'placeholder', // 'image', 'video' ou 'placeholder'
+                    mediaUrl: '', // Mettez l'URL de votre image/vidéo ici
+                    icon: '🍫'
                 },
                 {
                     id: 2,
-                    name: 'Unicorn Isomere R/S',
+                    name: 'Unicorn',
                     description: 'Un mélange magique et coloré qui éveille les sens. Douceur sucrée avec une touche de vanille et de fruits rouges.',
-                    mediaType: 'image',
-                    mediaUrl: 'https://images.unsplash.com/photo-1558326567-98ae2405596b?w=500'
+                    mediaType: 'placeholder',
+                    mediaUrl: '',
+                    icon: '🦄'
                 },
+                {
+                    id: 3,
+                    name: 'Look out of Heaven',
+                    description: 'Une expérience céleste unique. Notes florales délicates avec un arrière-goût fruité et relaxant.',
+                    mediaType: 'placeholder',
+                    mediaUrl: '',
+                    icon: '☁️'
+                }
             ]
         };
         
@@ -381,11 +402,18 @@
 
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                
+                let mediaHTML = '';
+                if (product.mediaType === 'image' && product.mediaUrl) {
+                    mediaHTML = `<div class="product-media"><img src="${product.mediaUrl}" alt="${product.name}"></div>`;
+                } else if (product.mediaType === 'video' && product.mediaUrl) {
+                    mediaHTML = `<div class="product-media"><video src="${product.mediaUrl}" controls></video></div>`;
+                } else {
+                    mediaHTML = `<div class="product-media">${product.icon || '📦'}</div>`;
+                }
+                
                 card.innerHTML = `
-                    ${product.mediaType === 'image' 
-                        ? `<img src="${product.mediaUrl}" alt="${product.name}" class="product-media" onerror="this.style.background='linear-gradient(45deg, #f093fb 0%, #f5576c 100%)'; this.innerHTML='📷 Image'">` 
-                        : `<video src="${product.mediaUrl}" class="product-media" controls></video>`
-                    }
+                    ${mediaHTML}
                     
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
