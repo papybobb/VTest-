@@ -3,7 +3,6 @@ const CONFIG = {@TESTTEST
 // Remplacez par votre nom d’utilisateur Telegram (sans @)
 telegramUsername: ‘Le_V667’,
 
-```
 // Vos produits
 products: [
     {
